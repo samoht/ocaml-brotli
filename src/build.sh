@@ -12,6 +12,12 @@ cd brotli-1.1.0
 CC="$1"
 CFLAGS="$2 -O2"
 
+# brotli's shared_dictionary.c includes the legacy <memory.h> alias for
+# string.h, which minimal libcs (solo5 nolibc) do not ship; shim it.
+mkdir -p shims
+echo '#include <string.h>' > shims/memory.h
+CFLAGS="$CFLAGS -Ishims"
+
 # Use the cross toolchain's archiver, derived from the C compiler's prefix,
 # when it exists; the build machine's ar otherwise (see mirage/ocaml-gmp for
 # the macOS host / ELF target mismatch this avoids).
