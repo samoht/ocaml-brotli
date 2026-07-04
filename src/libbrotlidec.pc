@@ -1,0 +1,10 @@
+prefix=${pcfiledir}/../brotli
+includedir=${prefix}
+libdir=${prefix}
+
+Name: libbrotlidec
+Description: Brotli decoder library
+Version: 1.1.0
+Requires: libbrotlicommon
+Libs: -L${libdir} -lbrotlidec
+Cflags: -I${includedir}

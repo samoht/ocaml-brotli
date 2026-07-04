@@ -1,0 +1,21 @@
+opam-version: "2.0"
+maintainer: "Thomas Gazagnaire <thomas@gazagnaire.org>"
+license: "MIT"
+authors: "The Brotli Authors"
+homepage: "https://tangled.org/gazagnaire.org/ocaml-brotli"
+bug-reports: "https://tangled.org/gazagnaire.org/ocaml-brotli/issues"
+dev-repo: "git+https://tangled.org/gazagnaire.org/ocaml-brotli"
+build: [
+ [ "dune" "build" "-p" name "-j" jobs ]
+]
+depends: [
+  "ocaml"
+  "dune" {>= "2.6"}
+]
+synopsis: "The Brotli compression library, packaged with Dune"
+description: """Dune packaging of Brotli (https://github.com/google/brotli),
+suitable for cross-compilation. The upstream release tarball is vendored
+verbatim and compiled with the selected OCaml toolchain's C compiler, so a
+findlib cross toolchain (e.g. solo5) gets target-ABI libbrotli{common,dec,enc}.a
+archives, headers and relocatable pkg-config files. Follows the packaging
+approach of mirage/ocaml-gmp."""

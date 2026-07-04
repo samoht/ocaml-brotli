@@ -1,0 +1,10 @@
+prefix=${pcfiledir}/../brotli
+includedir=${prefix}
+libdir=${prefix}
+
+Name: libbrotlienc
+Description: Brotli encoder library
+Version: 1.1.0
+Requires: libbrotlicommon
+Libs: -L${libdir} -lbrotlienc
+Cflags: -I${includedir}

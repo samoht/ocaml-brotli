@@ -1,0 +1,9 @@
+prefix=${pcfiledir}/../brotli
+includedir=${prefix}
+libdir=${prefix}
+
+Name: libbrotlicommon
+Description: Brotli common dictionary library
+Version: 1.1.0
+Libs: -L${libdir} -lbrotlicommon
+Cflags: -I${includedir}

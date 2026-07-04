@@ -1,0 +1,46 @@
+; cross-compiled Brotli
+
+(library
+ (name brotli)
+ (public_name brotli)
+ (foreign_archives brotlicommon brotlidec brotlienc))
+
+(install
+ (section lib)
+ (files
+  (dllbrotlicommon.so as libbrotlicommon.so)
+  (dllbrotlidec.so as libbrotlidec.so)
+  (dllbrotlienc.so as libbrotlienc.so)
+  (brotli_decode.h as brotli/decode.h)
+  (brotli_encode.h as brotli/encode.h)
+  (brotli_port.h as brotli/port.h)
+  (brotli_shared_dictionary.h as brotli/shared_dictionary.h)
+  (brotli_types.h as brotli/types.h)))
+
+(install
+ (section lib_root)
+ (files
+  (libbrotlicommon.pc as pkgconfig/libbrotlicommon.pc)
+  (libbrotlidec.pc as pkgconfig/libbrotlidec.pc)
+  (libbrotlienc.pc as pkgconfig/libbrotlienc.pc)))
+
+(rule
+ (targets
+  libbrotlicommon.a
+  libbrotlidec.a
+  libbrotlienc.a
+  dllbrotlicommon.so
+  dllbrotlidec.so
+  dllbrotlienc.so
+  brotli_decode.h
+  brotli_encode.h
+  brotli_port.h
+  brotli_shared_dictionary.h
+  brotli_types.h)
+ (deps brotli-1.1.0.tar.gz build.sh)
+ (action
+  (with-stdout-to
+   build.log
+   (run sh ./build.sh "%{ocaml-config:c_compiler}"
+     "%{ocaml-config:ocamlc_cflags}"
+     %{ocaml-config:supports_shared_libraries}))))
