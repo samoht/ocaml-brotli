@@ -18,6 +18,10 @@ mkdir -p shims
 echo '#include <string.h>' > shims/memory.h
 CFLAGS="$CFLAGS -Ishims"
 
+# Minimal libcs may also omit the EXIT_* status macros the encoder's
+# out-of-memory guard uses.
+CFLAGS="$CFLAGS -DEXIT_FAILURE=1"
+
 # Use the cross toolchain's archiver, derived from the C compiler's prefix,
 # when it exists; the build machine's ar otherwise (see mirage/ocaml-gmp for
 # the macOS host / ELF target mismatch this avoids).
